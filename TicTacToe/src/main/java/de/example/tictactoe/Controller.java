@@ -1,9 +1,14 @@
 package de.example.tictactoe;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,6 +17,7 @@ public class Controller {
     // Variablen
     private final ArrayList<Button> buttons = new ArrayList<>();
     private boolean win;
+    private Timeline timeline;
 
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnClose, btnNewGame;
@@ -22,21 +28,34 @@ public class Controller {
     @FXML
     private Label lblTitle;
 
+    /**
+     * App beenden.
+     */
     @FXML
     void appClose() {
         System.exit(0);
     }
 
+    /**
+     * Neues Spiel starten und Werte zurücksetzen.
+     * Beginner wird zufällig ermittelt.
+     */
     @FXML
     void newGame() {
+
+        // ArrayList durchlaufen und entsprechende Werte setzen.
         for (Button button : buttons) {
             button.setText("");
             button.setDisable(false);
+            button.setTextFill(Color.BLACK);
         }
 
         // Variable zurücksetzen.
         win = false;
 
+        timeline = null;
+
+        // Zufallszahl generieren.
         int random = ThreadLocalRandom.current().nextInt(1, 3);
 
         switch (random) {
@@ -66,15 +85,15 @@ public class Controller {
         }
 
         for (Button button : buttons) {
-            if (button.getText().equals("X") || button.getText().equals("O")) button.setDisable(true);
+            if (button.getText().equals("X")) button.setDisable(true);
         }
 
         lblPlayer.setText("Computer ist am Zug!");
 
-        if (!win) setComputer();
-
         // Methodenaufruf.
         win();
+
+        if (!win) setComputer();
     }
 
     @FXML
@@ -110,48 +129,56 @@ public class Controller {
      */
     void setComputer () {
 
-        // Zufallszahl generieren.
-        int random = ThreadLocalRandom.current().nextInt(1, 10);
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), ev -> {
 
-        // Einen Button aus der ArraysList 'buttons' durch den Index zuweisen.
-        Button button = buttons.get(random -1);
+            timeline.stop();
 
-        if (!button.isDisabled()) {
-            button.setText("O");
-            button.setDisable(true);
-        } else {
-            setComputer();
-        }
+            // Zufallszahl generieren.
+            int random = ThreadLocalRandom.current().nextInt(1, 10);
 
-        lblPlayer.setText("Spieler ist am Zug!");
+            // Einen Button aus der ArraysList 'buttons' durch den Index zuweisen.
+            Button button = buttons.get(random -1);
+
+            if (!button.isDisabled()) {
+                button.setText("O");
+                button.setDisable(true);
+                lblPlayer.setText("Spieler ist am Zug!");
+                win();
+            } else {
+                setComputer();
+            }
+        }));
+        
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     void win() {
 
-        if (btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals("X")) end("Spieler");
-        if (btn4.getText().equals("X") && btn5.getText().equals("X") && btn6.getText().equals("X")) end("Spieler");
-        if (btn7.getText().equals("X") && btn8.getText().equals("X") && btn9.getText().equals("X")) end("Spieler");
+        if (btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals("X")) end("Spieler", 1,2,3);
+        if (btn4.getText().equals("X") && btn5.getText().equals("X") && btn6.getText().equals("X")) end("Spieler", 4,5,6);
+        if (btn7.getText().equals("X") && btn8.getText().equals("X") && btn9.getText().equals("X")) end("Spieler", 7,8,9);
 
-        if (btn1.getText().equals("X") && btn4.getText().equals("X") && btn7.getText().equals("X")) end("Spieler");
-        if (btn2.getText().equals("X") && btn5.getText().equals("X") && btn8.getText().equals("X")) end("Spieler");
-        if (btn3.getText().equals("X") && btn6.getText().equals("X") && btn9.getText().equals("X")) end("Spieler");
+        if (btn1.getText().equals("X") && btn4.getText().equals("X") && btn7.getText().equals("X")) end("Spieler", 1,4,7);
+        if (btn2.getText().equals("X") && btn5.getText().equals("X") && btn8.getText().equals("X")) end("Spieler", 2,5,8);
+        if (btn3.getText().equals("X") && btn6.getText().equals("X") && btn9.getText().equals("X")) end("Spieler", 3,6,9);
 
-        if (btn1.getText().equals("X") && btn5.getText().equals("X") && btn9.getText().equals("X")) end("Spieler");
-        if (btn3.getText().equals("X") && btn5.getText().equals("X") && btn7.getText().equals("X")) end("Spieler");
+        if (btn1.getText().equals("X") && btn5.getText().equals("X") && btn9.getText().equals("X")) end("Spieler", 1,5,9);
+        if (btn3.getText().equals("X") && btn5.getText().equals("X") && btn7.getText().equals("X")) end("Spieler", 3,5,7);
 
-        if (btn1.getText().equals("O") && btn2.getText().equals("O") && btn3.getText().equals("O")) end("Computer");
-        if (btn4.getText().equals("O") && btn5.getText().equals("O") && btn6.getText().equals("O")) end("Computer");
-        if (btn7.getText().equals("O") && btn8.getText().equals("O") && btn9.getText().equals("O")) end("Computer");
+        if (btn1.getText().equals("O") && btn2.getText().equals("O") && btn3.getText().equals("O")) end("Computer", 1,2,3);
+        if (btn4.getText().equals("O") && btn5.getText().equals("O") && btn6.getText().equals("O")) end("Computer", 4,5,6);
+        if (btn7.getText().equals("O") && btn8.getText().equals("O") && btn9.getText().equals("O")) end("Computer", 7,8,9);
 
-        if (btn1.getText().equals("O") && btn4.getText().equals("O") && btn7.getText().equals("O")) end("Computer");
-        if (btn2.getText().equals("O") && btn5.getText().equals("O") && btn8.getText().equals("O")) end("Computer");
-        if (btn3.getText().equals("O") && btn6.getText().equals("O") && btn9.getText().equals("O")) end("Computer");
+        if (btn1.getText().equals("O") && btn4.getText().equals("O") && btn7.getText().equals("O")) end("Computer", 1,4,7);
+        if (btn2.getText().equals("O") && btn5.getText().equals("O") && btn8.getText().equals("O")) end("Computer", 2,5,8);
+        if (btn3.getText().equals("O") && btn6.getText().equals("O") && btn9.getText().equals("O")) end("Computer", 3,6,9);
 
-        if (btn1.getText().equals("O") && btn5.getText().equals("O") && btn9.getText().equals("O")) end("Computer");
-        if (btn3.getText().equals("O") && btn5.getText().equals("O") && btn7.getText().equals("O")) end("Computer");
+        if (btn1.getText().equals("O") && btn5.getText().equals("O") && btn9.getText().equals("O")) end("Computer", 1,5,9);
+        if (btn3.getText().equals("O") && btn5.getText().equals("O") && btn7.getText().equals("O")) end("Computer", 3,5,7);
     }
 
-    void end (String winner) {
+    void end (String winner, int b1, int b2, int b3) {
 
         // Durchlaufen der ArraysList.
         for (Button button : buttons) {
@@ -163,5 +190,13 @@ public class Controller {
 
         // Variable auf 'true' (Gewinn).
         win = true;
+
+        // Schriftfarbe der Gewinn-Buttons ändern.
+        for (int i = -1; i <= buttons.size(); i++) {
+            if (i == b1 || i == b2 || i == b3) {
+                Button button = buttons.get(i -1);
+                button.setTextFill(Color.rgb(0, 255, 26));
+            }
+        }
     }
 }
