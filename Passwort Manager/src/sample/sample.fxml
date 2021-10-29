@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <Pane blendMode="DARKEN">
+            <children>
+                <AnchorPane fx:id="pane" prefHeight="593.0" prefWidth="855.0">
+                    <children>
+                        <Pane blendMode="DARKEN" layoutX="23.0" layoutY="130.0" prefHeight="373.0" prefWidth="810.0">
+                            <children>
+                                <Label fx:id="lblNeueListe" layoutX="27.0" layoutY="25.0" text="Passwort-Liste">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="buttonAddList" disable="true" layoutX="27.0" layoutY="323.0" mnemonicParsing="false" onAction="#addInhalt" prefHeight="25.0" prefWidth="34.0" text="+">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="buttonDeleteList" disable="true" layoutX="65.0" layoutY="323.0" mnemonicParsing="false" onAction="#deleteInhalt" prefHeight="25.0" prefWidth="34.0" text="-">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Label layoutX="369.0" layoutY="55.0" text="Bezeichnung :">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="369.0" layoutY="95.0" text="Benutzername :">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="369.0" layoutY="135.0" text="Passwort  :">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="370.0" layoutY="175.0" text="Ort (URL) :">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="369.0" layoutY="215.0" text="Info :">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtLabel" disable="true" layoutX="492.0" layoutY="51.0" prefHeight="25.0" prefWidth="289.0">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="txtUsername" disable="true" layoutX="492.0" layoutY="91.0" prefHeight="25.0" prefWidth="289.0">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="txtPassword" disable="true" layoutX="492.0" layoutY="130.0" prefHeight="25.0" prefWidth="289.0" />
+                                <TextField fx:id="txtURL" disable="true" layoutX="492.0" layoutY="171.0" prefHeight="25.0" prefWidth="289.0">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </TextField>
+                                <TextArea fx:id="txtInfo" disable="true" layoutX="368.0" layoutY="242.0" prefHeight="106.0" prefWidth="412.0">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </TextArea>
+                                <ListView fx:id="lstInhalt" accessibleRole="LIST_ITEM" focusTraversable="false" layoutX="27.0" layoutY="86.0" onMouseClicked="#openList" pickOnBounds="false" prefHeight="229.0" prefWidth="289.0">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets></ListView>
+                                <ComboBox fx:id="comboList" focusTraversable="false" layoutX="112.0" layoutY="51.0" onAction="#comboList" prefHeight="25.0" prefWidth="204.0">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></ComboBox>
+                                <Button fx:id="deleteList" disable="true" layoutX="65.0" layoutY="51.0" mnemonicParsing="false" onAction="#deleteList" prefHeight="25.0" prefWidth="34.0" text="-">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <Button fx:id="addList" layoutX="27.0" layoutY="51.0" mnemonicParsing="false" onAction="#addList" prefHeight="25.0" prefWidth="34.0" text="+">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <Button fx:id="buttonSave" disable="true" layoutX="663.0" layoutY="2.0" mnemonicParsing="false" onAction="#change" text="Ändern / Schließen">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <TextField fx:id="txtNeueListe" layoutX="112.0" layoutY="51.0" prefHeight="25.0" prefWidth="204.0" visible="false" />
+                                <Button fx:id="buttonAbbruch" layoutX="292.0" layoutY="13.0" mnemonicParsing="false" onAction="#abbruchAddListe" style="-fx-background-color: #bb3c58;" text="X" textFill="WHITE" visible="false">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <TextField fx:id="txtTresor" layoutX="27.0" layoutY="150.0" prefHeight="25.0" prefWidth="289.0" visible="false">
+                                </TextField>
+                                <PasswordField fx:id="pwfPasswort" layoutX="27.0" layoutY="216.0" prefHeight="25.0" prefWidth="289.0" visible="false">
+                                </PasswordField>
+                                <PasswordField fx:id="pwfPasswortW" layoutX="27.0" layoutY="283.0" prefHeight="25.0" prefWidth="289.0" visible="false">
+                                </PasswordField>
+                                <Label fx:id="lblTresor" layoutX="30.0" layoutY="123.0" text="Neuer Eintrag :" visible="false">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPasswort" layoutX="30.0" layoutY="187.0" text="Passwort eingeben :" visible="false">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPasswortW" layoutX="30.0" layoutY="254.0" text="Passwort wiederholen :" visible="false">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="buttonCancelEintrag" layoutX="292.0" layoutY="111.0" mnemonicParsing="false" onAction="#cancelEintrag" style="-fx-background-color: #bb3c58;" text="X" textFill="WHITE" visible="false">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <Label fx:id="lblError" layoutX="30.0" layoutY="94.0" prefHeight="17.0" prefWidth="258.0" textFill="RED">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="buttonOpen" disable="true" layoutX="248.0" layoutY="323.0" mnemonicParsing="false" onAction="#pwEingabe" prefHeight="25.0" prefWidth="68.0" text="Öffnen">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <PasswordField fx:id="txtPWeingabe" layoutX="168.0" layoutY="360.0" prefHeight="25.0" prefWidth="149.0" visible="false">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </PasswordField>
+                                <Button fx:id="buttonCancelPW" layoutX="218.0" layoutY="324.0" mnemonicParsing="false" onAction="#cancelPW" style="-fx-background-color: #bb3c58;" text="X" textFill="WHITE" visible="false">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Label fx:id="lblChange" layoutX="348.0" layoutY="7.0" prefHeight="15.0" prefWidth="289.0" textFill="RED">
+                                    <font>
+                                        <Font name="Verdana" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Hyperlink fx:id="hLink" disable="true" layoutX="492.0" layoutY="196.0" onAction="#addLink" text="Öffnen" textFill="#97271b" />
+                            </children>
+                            <opaqueInsets>
+                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                            </opaqueInsets>
+                        </Pane>
+                        <Separator layoutX="23.0" layoutY="530.0" prefHeight="1.0" prefWidth="810.0" />
+                        <Button fx:id="buttonClose" layoutX="738.0" layoutY="547.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="95.0" text="Beenden">
+                            <font>
+                                <Font name="Verdana" size="12.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Separator layoutX="26.0" layoutY="114.0" prefHeight="3.0" prefWidth="810.0" />
+                        <Label fx:id="lblPWeingabe" layoutX="51.0" layoutY="496.0" text="Passwort :" visible="false">
+                            <font>
+                                <Font name="Verdana" size="12.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="81.0" fitWidth="810.0" layoutX="26.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../pics/titel.jpg" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="lblAnzahl" layoutX="70.0" layoutY="550.0" prefHeight="17.0" prefWidth="355.0">
+                            <font>
+                                <Font name="Verdana" size="12.0" />
+                            </font>
+                        </Label>
+                        <ImageView fx:id="imgKey" fitHeight="30.0" fitWidth="30.0" layoutX="26.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                            <image>
+                                <Image url="@../pics/list.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="lblInfo" layoutX="797.0" layoutY="28.0" onMouseClicked="#info" text="Info" textFill="BLACK" underline="true">
+                            <font>
+                                <Font name="Verdana Bold" size="12.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Label>
+                    </children>
+                    <opaqueInsets>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                    </opaqueInsets>
+                </AnchorPane>
+            </children>
+        </Pane>
+    </children>
+</GridPane>
