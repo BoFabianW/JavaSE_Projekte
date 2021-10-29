@@ -18,6 +18,7 @@ public class Controller {
     private final ArrayList<Button> buttons = new ArrayList<>();
     private boolean win;
     private Timeline timeline;
+    private int counter = 0;
 
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnClose, btnNewGame;
@@ -43,6 +44,11 @@ public class Controller {
     @FXML
     void newGame() {
 
+        // Zähler zurücksetzen.
+        counter = 0;
+
+        btnNewGame.setDisable(true);
+
         // ArrayList durchlaufen und entsprechende Werte setzen.
         for (Button button : buttons) {
             button.setText("");
@@ -64,6 +70,13 @@ public class Controller {
                 lblPlayer.setText("Computer ist am Zug!");
                 setComputer();
             }
+        }
+
+        try {
+            Thread.sleep(600);
+            btnNewGame.setDisable(false);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -88,6 +101,7 @@ public class Controller {
             if (button.getText().equals("X")) button.setDisable(true);
         }
 
+        counter ++;
         lblPlayer.setText("Computer ist am Zug!");
 
         // Methodenaufruf.
@@ -129,7 +143,7 @@ public class Controller {
      */
     void setComputer () {
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(0.4), ev -> {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.2), ev -> {
 
             timeline.stop();
 
@@ -142,8 +156,10 @@ public class Controller {
             if (!button.isDisabled()) {
                 button.setText("O");
                 button.setDisable(true);
+                counter ++;
                 lblPlayer.setText("Spieler ist am Zug!");
                 win();
+
             } else {
                 setComputer();
             }
@@ -154,6 +170,8 @@ public class Controller {
     }
 
     void win() {
+
+        if (counter == 9) lblPlayer.setText("Das Spiel ist vorbei!");
 
         if (btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals("X")) end("Spieler", 1,2,3);
         if (btn4.getText().equals("X") && btn5.getText().equals("X") && btn6.getText().equals("X")) end("Spieler", 4,5,6);
