@@ -636,6 +636,7 @@ public class Controller {
 
         File[] listDir = loadDir.listFiles();
 
+        assert listDir != null;
         for (File file : listDir) {
             if (file.isDirectory()) {
                 comboList.getItems().add(file.toString().substring(file.toString().lastIndexOf("\\") + 1));
@@ -790,6 +791,7 @@ public class Controller {
         String[] dateien = newDir.list();
 
         // Alle Dateien aus Verzeichnissen müssen vor dem Löschen des eigentlichen Ordners gelöscht werden.
+        assert dateien != null;
         for (String s : dateien) {
 
             String delete = System.getProperty("user.dir") + "\\Savelist\\" + comboList.getSelectionModel().getSelectedItem() + "\\" + s;
